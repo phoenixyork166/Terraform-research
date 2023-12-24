@@ -1,11 +1,16 @@
 resource "aws_key_pair" "mykey" {
   key_name   = "mykey"
+  # public_key = "${file("${var.PATH_TO_PUBLIC_KEY}")}"
   public_key = file(var.PATH_TO_PUBLIC_KEY)
 }
 
 resource "aws_instance" "example" {
+  #ami          = "${lookup(var.AMIS, var.AWS_REGION)}"
   ami           = var.AMIS[var.AWS_REGION]
   instance_type = "t2.micro"
+  #key_name     = "${aws_key_pair.mykey.key_name}"
+  # This is derived from above resource "aws_key_pair" "mykey" <=
+  # the key => "key_name" = "mykey"
   key_name      = aws_key_pair.mykey.key_name
 
   provisioner "file" {
@@ -22,6 +27,7 @@ resource "aws_instance" "example" {
   connection {
     host        = coalesce(self.public_ip, self.private_ip)
     type        = "ssh"
+    #user       = "${var.INSTANCE_USERNAME}"
     user        = var.INSTANCE_USERNAME
     private_key = file(var.PATH_TO_PRIVATE_KEY)
   }
