@@ -1,4 +1,6 @@
 ## Terraform-course
+[![Hashicorp](https://www.datocms-assets.com/2885/1633705692-hashistack.png)]
+
 ## Learning Terraform as a student
 * These files are part of a Udemy course about Terraform
 * Course URL: https://www.udemy.com/learn-devops-infrastructure-automation-with-terraform/?couponCode=TERRAFORM_GIT
